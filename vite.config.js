@@ -5,6 +5,7 @@ export default defineConfig({
        
     //https://vite.dev/config/server-options    
     server: {
+        host: '0.0.0.0',
         port: 8080,
         hot: true
     },
