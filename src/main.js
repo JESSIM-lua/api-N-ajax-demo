@@ -1,24 +1,60 @@
-import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
+import './style.css';
+// import './bootstrap/dist/css/bootstrap.css';
+import { displayCities } from './displayCitiesIncluded.js';
+
+
+
+
+
+
+console.log('Hello World');
+let message = 'Ca marche !!';
 
 document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
+  <div id="displayCities">${message}</div>
+`;
 
-setupCounter(document.querySelector('#counter'))
+document.querySelector('#goSearch').addEventListener('click', () => {
+  console.log('Button clicked');
+  const txt = document.querySelector('#txtSearch').value;
+  console.warn('texte : %s', txt);
+});
+
+
+
+
+// function setupSearch(button) {
+//   button.addEventListener('click', async () => {
+//     const searchBar = document.querySelector('#txtSearch')
+//     const query = searchBar.value
+//     console.log(query)
+//     document.querySelector('#app').appendChild(document.createElement('a'))
+//     const lien = document.querySelector('#app').lastChild
+//     lien.href = `https://github.com/${query}`
+//     lien.textContent = query
+//     lien.target = '_blank';
+//     displayCities(query)
+
+//     document.querySelector('#app').appendChild(document.createElement('br'))
+
+//   })
+// }
+
+function setupSearch(button) {
+  button.addEventListener('click', async () => {
+        const searchBar = document.querySelector('#txtSearch')
+        const query = searchBar.value
+        console.log(query)
+        displayCities(query)
+  })
+}
+
+
+setupSearch(document.querySelector('#goSearch'))
+
+
+
+// setupCounter(document.querySelector('#counter'))
+
+
+
