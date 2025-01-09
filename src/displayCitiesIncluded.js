@@ -23,65 +23,57 @@ const tableHeader = `
 document.querySelector('#displayCities').innerHTML = tableHeader;
  
 export function displayCities(txt) {
+    const url = new URL('http://127.0.0.1:8888/api/backendDynamic.php');
+    const params = { "code": txt };
+    url.search = new URLSearchParams(params);
 
-    let url = new URL('http://127.0.0.1:8888//api/backendDynamic.php')
-    let params = {"code" : txt}
-    url.search = new URLSearchParams(params)
+    fetch(url)
+        .then(function (response) {
+            console.log("Response : %O", response);
 
-    fetch(url).then (function(response){
-        console.log("Response : %O", response)
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
 
-        //Only if response code is 200
-        return response.json();
+            return response.json();
+        })
+        .then(function (data) {
+            console.log("Data : %O", data);
 
-    }).then(function(data){
-        //Make Update of page
-        console.log("Data : %O", data)
-        cities = data;
-        displayCities(txt);
-        
-    }).catch(function(error){
-        console.log("Error : %O", error)
-    })
-
-
-
-
-    
-
- 
-    const tbody = document.querySelector('#displayCities > table > tbody');
-    tbody.innerHTML = '';
- 
-    let filteredCities = txt
-        ? cities.filter(city => city.Name === txt)
-        : cities;
- 
- 
-        filteredCities.forEach(city => {
-            const tr = document.createElement('tr');
- 
-            const tdCity_Id = document.createElement('td');
-            tdCity_Id.textContent = city.City_Id;
-            tr.appendChild(tdCity_Id);
- 
-            const tdName = document.createElement('td');
-            tdName.textContent = city.Name;
-            tr.appendChild(tdName);
-
-            const tdCountryCode = document.createElement('td');
-            tdCountryCode.textContent = city.CountryCode;
-            tr.appendChild(tdCountryCode);
- 
-            const tdPopulation = document.createElement('td');
-            tdPopulation.textContent = city.Population;
-            tr.appendChild(tdPopulation);
- 
-            const tdDistrict = document.createElement('td');
-            tdDistrict.textContent = city.District;
-            tr.appendChild(tdDistrict);
- 
-            tbody.appendChild(tr);
+            updateTable(data);
+        })
+        .catch(function (error) {
+            console.error("Error : %O", error);
         });
 }
- 
+
+function updateTable(cities) {
+    const tbody = document.querySelector('#displayCities > table > tbody');
+    tbody.innerHTML = '';
+
+    cities.forEach(city => {
+        const tr = document.createElement('tr');
+
+        const tdCityId = document.createElement('td');
+        tdCityId.textContent = city.id || 'N/A';
+        tr.appendChild(tdCityId);
+
+        const tdName = document.createElement('td');
+        tdName.textContent = city.nom || 'N/A';
+        tr.appendChild(tdName);
+
+        const tdCountryCode = document.createElement('td');
+        tdCountryCode.textContent = city.code || 'N/A';
+        tr.appendChild(tdCountryCode);
+
+        const tdPopulation = document.createElement('td');
+        tdPopulation.textContent = city.population || 'N/A';
+        tr.appendChild(tdPopulation);
+
+        const tdDistrict = document.createElement('td');
+        tdDistrict.textContent = city.district || 'N/A';
+        tr.appendChild(tdDistrict);
+
+        tbody.appendChild(tr);
+    });
+}

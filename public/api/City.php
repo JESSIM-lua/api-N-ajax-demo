@@ -1,88 +1,86 @@
 <?php
 
-class City extends stdClass implements JsonSerializable
+class City implements JsonSerializable
 {
-    protected $City_Id = 0;
-    protected $Name;
-    protected $Country_Code;
-    protected $Population;
-    protected $District;
+    protected int $cityId = 0;
+    protected ?string $name = null;
+    protected ?string $countryCode = null;
+    protected ?int $population = null;
+    protected ?string $district = null;
 
-    public function __construct($City_Id, $Name, $Country_Code, $Population, $District)
-    {
-        $this->City_Id = $City_Id;
-        $this->Name = $Name;
-        $this->Country_Code = $Country_Code;
-        $this->Population = $Population;
-        $this->District = $District;
+    public function __construct(
+        int $cityId = 0,
+        ?string $name = null,
+        ?string $countryCode = null,
+        ?int $population = null,
+        ?string $district = null
+    ) {
+        $this->cityId = $cityId;
+        $this->name = $name;
+        $this->countryCode = $countryCode;
+        $this->population = $population;
+        $this->district = $district;
     }
 
-
-
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             "id" => $this->getCityId(),
             "nom" => $this->getName(),
             "code" => $this->getCountryCode(),
             "population" => $this->getPopulation(),
-            "district" => $this->getDistrict()
-
+            "district" => $this->getDistrict(),
         ];
     }
 
-
-    public function getCityId()
+    // Getters and Setters
+    public function getCityId(): int
     {
-        return $this->City_Id;
+        return $this->cityId;
     }
 
-    public function setCityId($City_Id)
+    public function setCityId(int $cityId): void
     {
-        $this->City_Id = $City_Id;
+        $this->cityId = $cityId;
     }
 
-    public function getName()
+    public function getName(): ?string
     {
-        return $this->Name;
+        return $this->name;
     }
 
-    public function setName($Name)
+    public function setName(?string $name): void
     {
-        $this->Name = $Name;
+        $this->name = $name;
     }
 
-    public function getCountryCode()
+    public function getCountryCode(): ?string
     {
-        return $this->Country_Code;
+        return $this->countryCode;
     }
 
-    public function setCountryCode($Country_Code)
+    public function setCountryCode(?string $countryCode): void
     {
-        $this->Country_Code = $Country_Code;
+        $this->countryCode = $countryCode;
     }
 
-    public function getPopulation()
+    public function getPopulation(): ?int
     {
-        return $this->Population;
+        return $this->population;
     }
 
-    public function setPopulation($Population)
+    public function setPopulation(?int $population): void
     {
-        $this->Population = $Population;
+        $this->population = $population;
     }
 
-    public function getDistrict()
+    public function getDistrict(): ?string
     {
-        return $this->District;
+        return $this->district;
     }
 
-    public function setDistrict($District)
+    public function setDistrict(?string $district): void
     {
-        $this->District = $District;
+        $this->district = $district;
     }
-
-
-
-
 }

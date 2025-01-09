@@ -18,27 +18,9 @@ document.querySelector('#goSearch').addEventListener('click', () => {
   console.log('Button clicked');
   const txt = document.querySelector('#txtSearch').value;
   console.warn('texte : %s', txt);
+  displayCities(txt);
 });
 
-
-
-
-// function setupSearch(button) {
-//   button.addEventListener('click', async () => {
-//     const searchBar = document.querySelector('#txtSearch')
-//     const query = searchBar.value
-//     console.log(query)
-//     document.querySelector('#app').appendChild(document.createElement('a'))
-//     const lien = document.querySelector('#app').lastChild
-//     lien.href = `https://github.com/${query}`
-//     lien.textContent = query
-//     lien.target = '_blank';
-//     displayCities(query)
-
-//     document.querySelector('#app').appendChild(document.createElement('br'))
-
-//   })
-// }
 
 function setupSearch(button) {
   button.addEventListener('click', async () => {
