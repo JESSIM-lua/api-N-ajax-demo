@@ -23,7 +23,7 @@ const tableHeader = `
 document.querySelector('#displayCities').innerHTML = tableHeader;
  
 export function displayCities(txt) {
-    const url = new URL('http://127.0.0.1:8888/api/backendDynamic.php');
+    const url = new URL('http://127.0.0.1:8000/cities');
     const params = { "code": txt };
     url.search = new URLSearchParams(params);
 
@@ -55,23 +55,23 @@ function updateTable(cities) {
         const tr = document.createElement('tr');
 
         const tdCityId = document.createElement('td');
-        tdCityId.textContent = city.id || 'N/A';
+        tdCityId.textContent = city.City_Id || 'N/A';
         tr.appendChild(tdCityId);
 
         const tdName = document.createElement('td');
-        tdName.textContent = city.nom || 'N/A';
+        tdName.textContent = city.Name || 'N/A';
         tr.appendChild(tdName);
 
         const tdCountryCode = document.createElement('td');
-        tdCountryCode.textContent = city.code || 'N/A';
+        tdCountryCode.textContent = city.CountryCode || 'N/A';
         tr.appendChild(tdCountryCode);
 
         const tdPopulation = document.createElement('td');
-        tdPopulation.textContent = city.population || 'N/A';
+        tdPopulation.textContent = city.Population || 'N/A';
         tr.appendChild(tdPopulation);
 
         const tdDistrict = document.createElement('td');
-        tdDistrict.textContent = city.district || 'N/A';
+        tdDistrict.textContent = city.District || 'N/A';
         tr.appendChild(tdDistrict);
 
         tbody.appendChild(tr);
